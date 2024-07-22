@@ -1,11 +1,13 @@
 const threshold = 170;
-setTimeout(() => {
+function checkDevToolsBySizing() {
   const devToolsOpen =
     window.outerWidth - window.innerWidth > threshold ||
     window.outerHeight - window.innerHeight > threshold ||
     window.Firebug?.chrome?.isInitialized;
 
   if (devToolsOpen) {
-    document.dispatchEvent(new CustomEvent("isDeveloperToolsOpen", { detail: true }));
+    document.dispatchEvent(new CustomEvent("developerToolsOpened"));
   }
-}, 100);
+}
+
+setInterval(checkDevToolsBySizing, 1000);

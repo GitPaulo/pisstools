@@ -1,9 +1,9 @@
-setTimeout(() => {
+function checkDevToolsByDebugger() {
   const start = performance.now();
   debugger;
   if (performance.now() - start > 100) {
-    document.dispatchEvent(
-      new CustomEvent("isDeveloperToolsOpen", { detail: true })
-    );
+    document.dispatchEvent(new CustomEvent("developerToolsOpened"));
   }
-}, 250);
+}
+
+setInterval(checkDevToolsByDebugger, 500);

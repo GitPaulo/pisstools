@@ -1,12 +1,12 @@
-setTimeout(() => {
+function checkDevToolsByToString() {
   const element = new Image();
   Object.defineProperty(element, "id", {
     get: function () {
-      document.dispatchEvent(
-        new CustomEvent("isDeveloperToolsOpen", { detail: true })
-      );
+      document.dispatchEvent(new CustomEvent("developerToolsOpened"));
     },
   });
 
   console.log("%c", element);
-}, 250);
+}
+
+setInterval(checkDevToolsByToString, 250);

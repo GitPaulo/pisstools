@@ -28,5 +28,5 @@
     );
     const spamData = generateSpamData(rows, columns);
     console.table(spamData);
-  }, 333);
+  }, 444);
 }
