@@ -1,5 +1,4 @@
-node_modules
-dist
-test
+node_modules/
+test/
 *.config.js
 *.lock
