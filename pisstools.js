@@ -1,13 +1,26 @@
 /**
+ * Spam the console with a table to fill the console height and width
+ */
+const spamConsoleWorker = new Worker('./workers/consoleSpam.js');
+const spamNetworkWorker = new Worker('./workers/networkSpam.js');
+
+/**
  *  Start detection methods
  */
+document.addEventListener("isDeveloperToolsOpen", (event) => {
+  spamWorker.postMessage({
+    devtoolsHeight: Math.abs(window.innerHeight - window.outerHeight),
+    devtoolsWidth: Math.abs(window.innerWidth - window.outerWidth)
+  });
+  if (event.detail) {
+    alert("🛑 Stop using developer tools!");
+    setTimeout(() => window.location.reload(), 500);
+  }
+});
 import "./detect/detectBySizing";
-// import "./detect/detectByString";
-
-window.addEventListener(
-  "devtoolschange",
-  ({ detail }) => detail?.isDeveloperToolsOpen && window.alert("✋ No developer tools!")
-);
+import "./detect/detectByToString";
+import "./detect/detectByDebugger";
+import "./detect/detectByStackTrace";
 
 /**
  * Disable common ways to open tools
@@ -24,41 +37,17 @@ document.addEventListener("keydown", (e) => {
 });
 
 /**
- * Spam the console with a table to fill the console height
+ * Disable copy paste
  */
-(() => {
-  const spamLine = "===N=O==D=E=V=E=L=O=P=E=R==T=O=O=L=S===";
-  const calculateHeight = () => {
-    const devtoolsHeight = window.innerHeight - window.outerHeight;
-    return Math.abs(devtoolsHeight);
-  };
-  const generateSpamData = (rows, columns) => {
-    const spamData = [];
-    for (let i = 0; i < rows; i++) {
-      const row = {};
-      for (let j = 0; j < columns; j++) {
-        row[j] = spamLine;
-      }
-      spamData.push(row);
-    }
-    return spamData;
-  };
-  setInterval(() => {
-    const devtoolsHeight = calculateHeight();
-    const rows = Math.max(50, Math.floor(devtoolsHeight / 20));
-    const columns = 20;
-    const spamData = generateSpamData(rows, columns);
-    console.table(spamData);
-  }, 1000);
-})();
+document.addEventListener("copy", (e) => e.preventDefault());
+document.addEventListener("paste", (e) => e.preventDefault());
+document.addEventListener("cut", (e) => e.preventDefault());
+document.addEventListener("selectstart", (e) => e.preventDefault());
 
 /**
  * Aggressive debugger injection
  */
-(() => {
-  setInterval(() => {
-    (function () {
-      debugger;
-    })();
-  }, 100);
+(function r() {
+  debugger;
+  requestAnimationFrame(r);
 })();

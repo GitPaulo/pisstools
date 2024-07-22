@@ -1,18 +1,11 @@
 const threshold = 170;
-const checkDevTools = () => {
+setTimeout(() => {
   const devToolsOpen =
-    globalThis.outerWidth - globalThis.innerWidth > threshold ||
-    globalThis.outerHeight - globalThis.innerHeight > threshold ||
-    (globalThis.Firebug?.chrome?.isInitialized);
+    window.outerWidth - window.innerWidth > threshold ||
+    window.outerHeight - window.innerHeight > threshold ||
+    window.Firebug?.chrome?.isInitialized;
 
-  const isDeveloperToolsOpen = devToolsOpen;
-  if (globalThis.isDeveloperToolsOpen !== isDeveloperToolsOpen) {
-    globalThis.isDeveloperToolsOpen = isDeveloperToolsOpen;
-    globalThis.dispatchEvent(new CustomEvent('devtoolschange', { detail: { isDeveloperToolsOpen } }));
+  if (devToolsOpen) {
+    document.dispatchEvent(new CustomEvent("isDeveloperToolsOpen", { detail: true }));
   }
-};
-
-globalThis.isDeveloperToolsOpen = false;
-setInterval(checkDevTools, 200);
-
-export default checkDevTools;
+}, 100);
