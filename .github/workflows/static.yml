@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
@@ -43,17 +43,18 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Copy dist to test
+        run: cp -r dist test/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the 'test' directory and 'dist' directory
-          path: |
-            test
-            dist
-  
+          # Upload the 'test' directory including 'dist' contents
+          path: 'test'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
