@@ -1,8 +1,8 @@
 /**
  * Spam the console with a table to fill the console height and width
  */
-const spamConsoleWorker = new Worker('./workers/consoleSpam.js');
-const spamNetworkWorker = new Worker('./workers/networkSpam.js');
+const spamConsoleWorker = new Worker('./workers/consoleSpam.worker.js');
+const spamNetworkWorker = new Worker('./workers/networkSpam.worker.js');
 
 /**
  *  Start detection methods

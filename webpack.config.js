@@ -20,6 +20,10 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.worker\.js$/, // worker loader files
+        use: { loader: 'worker-loader' },
       }
     ]
   },
