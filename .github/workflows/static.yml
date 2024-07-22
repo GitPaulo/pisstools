@@ -49,9 +49,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the built files
-          path: 'test'
-
+          # Upload the 'test' directory and 'dist' directory
+          path: |
+            test
+            dist
+  
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
