@@ -4,7 +4,7 @@
   "description": "A library to make it difficult to open and use devtools.",
   "main": "dist/pisstools.min.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack && cp -r dist/ test/"
   },
   "repository": {
     "type": "git",

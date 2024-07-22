@@ -1,5 +1,6 @@
 # dist
 /dist
+/test/dist
 
 # General
 /node_modules
