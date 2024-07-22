@@ -1,8 +1,10 @@
 /**
  * Spam the console with a table to fill the console height and width
  */
-const spamConsoleWorker = new Worker('./workers/consoleSpam.worker.js');
-const spamNetworkWorker = new Worker('./workers/networkSpam.worker.js');
+import ConsoleSpamWorker from './workers/consoleSpam.worker.js';
+import NetworkSpamWorker from './workers/networkSpam.worker.js';
+new ConsoleSpamWorker();
+new NetworkSpamWorker();
 
 /**
  *  Start detection methods
@@ -48,6 +50,6 @@ document.addEventListener("selectstart", (e) => e.preventDefault());
  * Aggressive debugger injection
  */
 (function r() {
-  debugger;
   requestAnimationFrame(r);
+  debugger;
 })();

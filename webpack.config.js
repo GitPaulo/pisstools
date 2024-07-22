@@ -1,5 +1,7 @@
 const path = require("path");
+
 const TerserPlugin = require("terser-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const JavaScriptObfuscator = require("webpack-obfuscator");
 
 module.exports = {
@@ -26,7 +28,7 @@ module.exports = {
         use: [
           {
             loader: "worker-loader",
-            options: { inline: "fallback" },
+            options: { filename: "[contenthash].worker.js" },
           },
           {
             loader: "babel-loader",
@@ -57,6 +59,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new JavaScriptObfuscator(
       {
         compact: true,
